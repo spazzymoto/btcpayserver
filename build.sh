@@ -1,3 +1,3 @@
 #!/bin/bash
 
-dotnet build -c Release BTCPayServer/BTCPayServer.csproj
+dotnet build -c Debug BTCPayServer/BTCPayServer.csproj

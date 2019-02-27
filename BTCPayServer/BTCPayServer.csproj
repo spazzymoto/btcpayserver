@@ -45,11 +45,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <ProjectReference Include="/opt/NBitcoin/NBitcoin/NBitcoin.csproj" />
+    <ProjectReference Include="/tmp/NBitcoin/NBitcoin/NBitcoin.csproj" />
     <!-- <PackageReference Include="NBitcoin" Version="4.1.1.78" /> -->
     <PackageReference Include="NBitpayClient" Version="1.0.0.31" />	  
     <PackageReference Include="DBreeze" Version="1.92.0" />
-    <ProjectReference Include="/opt/NBXplorer/NBXplorer.Client/NBXplorer.Client.csproj" />
+    <ProjectReference Include="/tmp/NBXplorer/NBXplorer.Client/NBXplorer.Client.csproj" />
     <!-- <PackageReference Include="NBXplorer.Client" Version="2.0.0.3" /> -->
     <PackageReference Include="NicolasDorier.CommandLine" Version="1.0.0.2" />
     <PackageReference Include="NicolasDorier.CommandLine.Configuration" Version="1.0.0.3" />

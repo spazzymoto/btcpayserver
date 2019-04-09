@@ -84,7 +84,6 @@ namespace BTCPayServer.Services.Rates
                 (DisplayName: "Coincheck", Name: "coincheck"),
                 (DisplayName: "Bittylicious", Name: "bittylicious"),
                 (DisplayName: "Gemini", Name: "gemini"),
-                (DisplayName: "QuadrigaCX", Name: "quadrigacx"),
                 (DisplayName: "Bit2C", Name: "bit2c"),
                 (DisplayName: "Luno", Name: "luno"),
                 (DisplayName: "Negocie Coins", Name: "negociecoins"),

@@ -20,12 +20,14 @@ using BTCPayServer.Models.InvoicingModels;
 using BTCPayServer.Logging;
 using BTCPayServer.Payments;
 using System.Data.Common;
+using System.Text.RegularExpressions;
 
 namespace BTCPayServer.Services.Invoices
 {
     public class InvoiceRepository : IDisposable
     {
 
+        private Regex cryptoCodeRegex = new Regex("\"cryptoCode\": \"(\\w+)\",", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private readonly DBreezeEngine _Engine;
         public DBreezeEngine Engine
@@ -654,11 +656,24 @@ retry:
 
         private T ToObject<T>(byte[] value, Network network)
         {
-            return NBitcoin.JsonConverters.Serializer.ToObject<T>(ZipUtils.Unzip(value), network);
+            string objectJson = ZipUtils.Unzip(value);
+            if (typeof(T) == typeof(PaymentEntity) && network == null){
+                Match match = cryptoCodeRegex.Match(objectJson);
+                if (match.Success)
+                {
+                    string cryptoCode = match.Groups[1].Value;
+                    network = Network.GetNetwork(cryptoCode.ToLowerInvariant() + "-mainnet");
+                }
+            }
+            return NBitcoin.JsonConverters.Serializer.ToObject<T>(objectJson, network);
         }
 
         private byte[] ToBytes<T>(T obj, Network network)
         {
+            if (typeof(T) == typeof(PaymentEntity) && network == null){
+                var cryptoCode = typeof(T).GetProperty("CryptoCode").GetValue(obj);
+                network = Network.GetNetwork(cryptoCode + "-mainnet");
+            }
             return ZipUtils.Zip(NBitcoin.JsonConverters.Serializer.ToString(obj, network));
         }
 
